@@ -34,3 +34,12 @@ jobs:
       - name: Build app
         run: |
           fastlane gym --scheme "ReactNativeGithubActions" --workspace "./ios/ReactNativeGithubActions.xcworkspace"
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ env.PRODUCT_NAME }}.ipa
+            ${{ env.PRODUCT_NAME }}.app.dSYM.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
