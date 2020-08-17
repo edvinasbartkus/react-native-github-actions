@@ -1,9 +1,6 @@
 name: ios
 
-on:
-  push:
-    branches: [ master ]
-    tags: [ v* ]
+on: [push]
 
 jobs:
   deploy:
