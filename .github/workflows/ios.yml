@@ -9,6 +9,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
       - uses: actions/setup-node@master
+      - uses: c-hive/gha-yarn-cache@v1
       - name: Install node modules
         run: |
           yarn install
@@ -38,6 +39,8 @@ jobs:
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: v$GITHUB_RUN_NUMBER
+          name: Build $GITHUB_RUN_NUMBER
           files: |
             ${{ env.PRODUCT_NAME }}.ipa
             ${{ env.PRODUCT_NAME }}.app.dSYM.zip
