@@ -9,6 +9,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
       - uses: actions/setup-node@master
+      - uses: c-hive/gha-yarn-cache@v1
       - name: Install node modules
         run: |
           yarn install
@@ -34,3 +35,20 @@ jobs:
       - name: Build app
         run: |
           fastlane gym --scheme "ReactNativeGithubActions" --workspace "./ios/ReactNativeGithubActions.xcworkspace"
+      - name: run number with offset
+        env:
+          NUM: ${{ github.run_number }}
+        run: |
+          echo ::set-env name=MANUAL_GITHUB_RUN_NUMBER::$(($NUM))
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.MANUAL_GITHUB_RUN_NUMBER }}
+          name: Build ${{ env.MANUAL_GITHUB_RUN_NUMBER }}
+          files: |
+            ${{ env.PRODUCT_NAME }}.ipa
+            ${{ env.PRODUCT_NAME }}.app.dSYM.zip
+
