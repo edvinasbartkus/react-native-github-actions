@@ -39,7 +39,7 @@ jobs:
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}
+          GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ env.GITHUB_RUN_NUMBER }}
