@@ -8,6 +8,7 @@ This is an example project to integrate Github Actions with React Native project
 ## TODO:
 - [x] iOS workflow to build the app
 - [ ] iOS to push to App Store
+- [x] JavaScript Tests
 - [x] Cache node_modules/
 - [x] Cache pods
 - [ ] Build dependencies
